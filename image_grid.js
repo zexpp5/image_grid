@@ -230,7 +230,6 @@
                 return img.src &&
                        img.offsetWidth >= 320 &&
                        img.offsetHeight >= 180 &&
-                       !img.src.toLowerCase().endsWith('.gif') &&
                        !img.closest('.pinterest-grid') &&
                        !img.closest('.image-modal');
             });
