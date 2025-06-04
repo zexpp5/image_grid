@@ -227,11 +227,23 @@
     function collectImages() {
         return Array.from(document.getElementsByTagName('img'))
             .filter(img => {
-                return img.src &&
-                       img.offsetWidth >= 320 &&
-                       img.offsetHeight >= 180 &&
-                       !img.closest('.pinterest-grid') &&
-                       !img.closest('.image-modal');
+                // Check if the image has a valid source
+                if (!img.src) return false;
+
+                // Get the natural dimensions if available, otherwise use offset dimensions
+                const width = img.naturalWidth || img.offsetWidth;
+                const height = img.naturalHeight || img.offsetHeight;
+
+                // Check if the image meets size requirements
+                const meetsSizeRequirements = width >= 320 && height >= 180;
+
+                // Check if the image is not already in our grid or modal
+                const notInOurElements = !img.closest('.pinterest-grid') && !img.closest('.image-modal');
+
+                // Check if the image is visible
+                const isVisible = img.offsetParent !== null;
+
+                return meetsSizeRequirements && notInOurElements && isVisible;
             });
     }
 
