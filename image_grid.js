@@ -142,6 +142,16 @@
             object-fit: contain;
         }
 
+        .modal-content.vertical {
+            max-width: none;
+            max-height: 100vh;
+            height: 100vh;
+            width: auto;
+            top: 0;
+            transform: translateX(-50%);
+            border-radius: 0;
+        }
+
         .thumbnail-sidebar {
             position: fixed;
             right: 0;
@@ -252,6 +262,16 @@
         const images = collectImages();
         modal.style.display = 'block';
         modalImg.src = clickedImg.src;
+        
+        // Add load event to handle image dimensions
+        modalImg.onload = function() {
+            if (this.naturalHeight > this.naturalWidth) {
+                this.classList.add('vertical');
+            } else {
+                this.classList.remove('vertical');
+            }
+        };
+        
         updateThumbnails(images, clickedImg.src);
 
         // Add mousewheel event listener
