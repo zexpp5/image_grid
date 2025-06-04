@@ -235,7 +235,7 @@
                 const height = img.naturalHeight || img.offsetHeight;
 
                 // Check if the image meets size requirements
-                const meetsSizeRequirements = width >= 320 && height >= 180;
+                const meetsSizeRequirements = width >= 240 && height >= 140;
 
                 // Check if the image is not already in our grid or modal
                 const notInOurElements = !img.closest('.pinterest-grid') && !img.closest('.image-modal');
