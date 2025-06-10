@@ -12,6 +12,29 @@
 (function() {
     'use strict';
 
+    // Configuration
+    const config = {
+        // Add domains to block here (without http:// or https://)
+        blockedSites: [
+            'x.com',
+            'github.com',
+            'taobao.com'
+        ]
+    };
+
+    // Check if current site is blocked
+    function isSiteBlocked() {
+        const currentHost = window.location.hostname;
+        return config.blockedSites.some(blockedSite =>
+            currentHost === blockedSite || currentHost.endsWith('.' + blockedSite)
+        );
+    }
+
+    // If site is blocked, don't run the script
+    if (isSiteBlocked()) {
+        return;
+    }
+
     // Create and inject CSS
     const style = document.createElement('style');
     style.textContent = `
@@ -37,35 +60,35 @@
         }
 
         @media (min-width: 1920px) {
-            .pinterest-grid { 
+            .pinterest-grid {
                 column-count: 8;
                 max-width: 95%;
             }
         }
 
         @media (min-width: 1600px) and (max-width: 1919px) {
-            .pinterest-grid { 
+            .pinterest-grid {
                 column-count: 6;
                 max-width: 95%;
             }
         }
 
         @media (max-width: 1200px) {
-            .pinterest-grid { 
+            .pinterest-grid {
                 column-count: 3;
                 max-width: 95%;
             }
         }
 
         @media (max-width: 800px) {
-            .pinterest-grid { 
+            .pinterest-grid {
                 column-count: 2;
                 max-width: 95%;
             }
         }
 
         @media (max-width: 400px) {
-            .pinterest-grid { 
+            .pinterest-grid {
                 column-count: 1;
                 max-width: 95%;
             }
@@ -98,9 +121,16 @@
             color: white;
             border: none;
             padding: 10px 10px;
-            border-radius: 10px;
+            border-radius: 50%;
             cursor: pointer;
             z-index: 10000;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .toggle-button {
@@ -111,9 +141,16 @@
             color: white;
             border: none;
             padding: 10px 10px;
-            border-radius: 10px;
+            border-radius: 50%;
             cursor: pointer;
             z-index: 9998;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .image-modal {
@@ -209,7 +246,7 @@
     document.body.appendChild(overlay);
 
     const closeButton = document.createElement('button');
-    closeButton.textContent = 'XXX';
+    closeButton.textContent = ' X ';
     closeButton.className = 'close-button';
     overlay.appendChild(closeButton);
 
@@ -262,7 +299,7 @@
         const images = collectImages();
         modal.style.display = 'block';
         modalImg.src = clickedImg.src;
-        
+
         // Add load event to handle image dimensions
         modalImg.onload = function() {
             if (this.naturalHeight > this.naturalWidth) {
@@ -271,7 +308,7 @@
                 this.classList.remove('vertical');
             }
         };
-        
+
         updateThumbnails(images, clickedImg.src);
 
         // Add mousewheel event listener
