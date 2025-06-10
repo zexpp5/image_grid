@@ -163,6 +163,54 @@
             transform: scale(1.2);
         }
 
+        .menu-buttons {
+            position: fixed;
+            bottom: 200px;
+            right: 10px;
+            z-index: 9997;
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-button:hover + .menu-buttons {
+            display: block;
+        }
+
+        .menu-button {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(136, 136, 136, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.2);
+            background: rgba(170, 170, 170, 0.8);
+        }
+
+        /* Position buttons in an arc */
+        .menu-button:nth-child(1) { transform: translate(-65px, -94px); }
+        .menu-button:nth-child(2) { transform: translate(-85px, -54px); }
+        .menu-button:nth-child(3) { transform: translate(-85px, -14px); }
+        .menu-button:nth-child(4) { transform: translate(-65px, 26px); }
+
+        /* Hover states with arc positions */
+        .menu-button:nth-child(1):hover { transform: translate(-65px, -94px) scale(1.2); }
+        .menu-button:nth-child(2):hover { transform: translate(-85px, -54px) scale(1.2); }
+        .menu-button:nth-child(3):hover { transform: translate(-85px, -14px) scale(1.2); }
+        .menu-button:nth-child(4):hover { transform: translate(-65px, 26px) scale(1.2); }
+
         .image-modal {
             display: none;
             position: fixed;
@@ -250,6 +298,19 @@
     toggleButton.textContent = 'IMG';
     toggleButton.className = 'toggle-button';
     document.body.appendChild(toggleButton);
+
+    // Create menu buttons container
+    const menuButtons = document.createElement('div');
+    menuButtons.className = 'menu-buttons';
+    document.body.appendChild(menuButtons);
+
+    // Create menu buttons
+    for (let i = 1; i <= 4; i++) {
+        const menuButton = document.createElement('button');
+        menuButton.textContent = i.toString();
+        menuButton.className = 'menu-button';
+        menuButtons.appendChild(menuButton);
+    }
 
     const overlay = document.createElement('div');
     overlay.className = 'pinterest-overlay';
