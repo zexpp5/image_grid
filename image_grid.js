@@ -131,6 +131,11 @@
             justify-content: center;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .close-button:hover {
+            transform: scale(1.2);
         }
 
         .toggle-button {
@@ -151,6 +156,11 @@
             justify-content: center;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .toggle-button:hover {
+            transform: scale(1.2);
         }
 
         .image-modal {
