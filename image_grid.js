@@ -117,7 +117,7 @@
             position: fixed;
             bottom: 200px;
             right: 10px;
-            background: #ff4444;
+            background: rgba(255, 68, 68, 0.8);
             color: white;
             border: none;
             padding: 10px 10px;
@@ -136,13 +136,14 @@
 
         .close-button:hover {
             transform: scale(1.2);
+            background: rgba(255, 68, 68, 0.9);
         }
 
         .toggle-button {
             position: fixed;
             bottom: 200px;
             right: 10px;
-            background: #2196F3;
+            background: rgba(33, 150, 243, 0.8);
             color: white;
             border: none;
             padding: 10px 10px;
@@ -161,6 +162,7 @@
 
         .toggle-button:hover {
             transform: scale(1.2);
+            background: rgba(33, 150, 243, 0.9);
         }
 
         .menu-buttons {
